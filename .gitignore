@@ -1,0 +1,13 @@
+winenv/
+__pycache__
+
+uploads/
+reports/
+nohup.out
+fabfile.py
+__init__.py
+app/api/populate/
+dumpdb.py/
+env
+env/
+/env

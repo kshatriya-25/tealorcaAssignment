@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sensor Data Stream</title>
+  <style>
+    body { font-family: sans-serif; padding: 1rem; }
+    #data { white-space: pre; background: #111; color: #0f0; padding: 1rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h2>📡 Live Sensor Stream</h2>
+  <div id="data">Waiting for data...</div>
+
+  <script>
+    const ws = new WebSocket("ws://localhost:8000/ws/sensor-stream");
+    const dataDiv = document.getElementById("data");
+
+    ws.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      const pretty = JSON.stringify(msg, null, 2);
+      dataDiv.textContent = pretty + "\n\n" + dataDiv.textContent;
+    };
+
+    ws.onerror = (e) => console.error("WebSocket error:", e);
+  </script>
+</body>
+</html>
