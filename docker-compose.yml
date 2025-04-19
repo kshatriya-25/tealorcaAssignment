@@ -19,7 +19,7 @@ services:
 
 
 
-  # Zookeeper container for Kafka
+  
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
@@ -46,7 +46,7 @@ services:
     volumes:
       - kafka_data:/var/lib/kafka/data
 
-  # Kafka initialization container
+
   kafka-init:
     image: confluentinc/cp-kafka:7.5.0
     depends_on:
