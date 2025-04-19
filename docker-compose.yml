@@ -1,19 +1,25 @@
-version: '3.7'
+
 
 services:
   timescaledb:
     image: timescale/timescaledb:latest-pg14
     container_name: timescaledb
+    user: postgres
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
       - "${DB_PORT}:5432"
     volumes:
       - timescale_data:/var/lib/postgresql/data
     restart: always
+    
 
+
+
+  # Zookeeper container for Kafka
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
@@ -23,6 +29,7 @@ services:
     ports:
       - "2181:2181"
 
+  # Kafka container
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
@@ -39,6 +46,7 @@ services:
     volumes:
       - kafka_data:/var/lib/kafka/data
 
+  # Kafka initialization container
   kafka-init:
     image: confluentinc/cp-kafka:7.5.0
     depends_on:
@@ -54,4 +62,5 @@ services:
 
 volumes:
   timescale_data:
+  timescale_data_replica:
   kafka_data:

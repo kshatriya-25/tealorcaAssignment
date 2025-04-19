@@ -6,7 +6,7 @@ from datetime import datetime
 import time
 
 API_URL = "http://localhost:8000/ingest"
-TOKEN = "secret123"
+TOKEN = "tealorca"
 
 PARAMETERS = ["temperature", "humidity", "sox"]
 
